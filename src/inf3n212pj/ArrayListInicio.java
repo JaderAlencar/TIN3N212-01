@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author 182120009
+ * @author jbferraz
  */
 public class ArrayListInicio {
 
@@ -27,7 +27,7 @@ public class ArrayListInicio {
         System.out.println("Quantos registros: " + nomes.size());
 
         nomes.add("Jair");
-        System.out.println("Depois de add valor");
+        System.out.println("Despois de add valor");
         System.out.println("Array está vazio?" + nomes.isEmpty());
         System.out.println("Quantos registros: " + nomes.size());
 
@@ -47,7 +47,7 @@ public class ArrayListInicio {
         System.out.println("Quantos registros: " + nomes.size());
         System.out.println("Nomes: " + nomes.toString());
 
-        System.out.println("Index de Jair:" + nomes.indexOf("Jair"));
+        System.out.println("Index de Jair: " + nomes.indexOf("Jair"));
         nomes.remove("Jair");
         System.out.println("Resultado depois de remover Jair");
         System.out.println("Quantos registros: " + nomes.size());
@@ -60,11 +60,45 @@ public class ArrayListInicio {
         System.out.println("Depois de add valor");
         System.out.println("Quantos registros: " + nomes.size());
         System.out.println("Nomes: " + nomes.toString());
-        
+
         Collections.sort(nomes);
         System.out.println("Array ordenado");
-        System.out.println("Nomes: " +nomes.toString());
+        System.out.println("Nomes: " + nomes.toString());
 
-    }
+        Collections.reverse(nomes);
+        System.out.println("Array ordem inversa");
+        System.out.println("Nomes: " + nomes.toString());
+
+        System.out.println("Impressão em lista");
+        for (String nome : nomes) {
+            System.out.println(nome);
+        }
+
+        System.out.print("Digite nome a ser pesquisado: ");
+        String pesqNome = leia.next();
+        for (String nome : nomes) {
+            if (nome.equals(pesqNome)) {
+                System.out.println("te encontrei!!!");
+                break;
+            }
+        }
+        
+        if (pesqNome(nomes, pesqNome)) {
+            System.out.println("te acheiii!!!!");
+        }else{
+            System.out.println("snif, não te achei!!!!");
+        }
+        
+
+    }//fim da main
+
+    public static boolean pesqNome(ArrayList<String> listaNomes, String nome) {
+        for (String listaNome : listaNomes) {
+            if (listaNome.equals(nome)) {
+                return true;
+            }
+        }
+        return false;
+    }//fim pesqNome
 
 }
