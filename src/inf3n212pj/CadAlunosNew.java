@@ -36,8 +36,10 @@ public class CadAlunosNew {
                     imprimeAlunos();
                     break;
                 case 4:
+                    deletarAluno();
                     break;
                 case 5:
+                    imprimeAlunosAtivos();
                     break;
                 case 0:
                     System.out.println("Aplicação encerrada!");
@@ -55,7 +57,7 @@ public class CadAlunosNew {
         System.out.println("1 - Cadastrar Aluno");
         System.out.println("2 - Editar Aluno");
         System.out.println("3 - Imprimir Todos Aluno");
-        System.out.println("4 - Deletar Aluno");
+        System.out.println("4 - Deletar/Inativar Aluno");
         System.out.println("5 - Imprimir Alunos Ativos");
         System.out.println("0 - Sair");
         System.out.println("digite aqui");
@@ -84,7 +86,8 @@ public class CadAlunosNew {
             alunos.add(a);
 
         } else {
-            System.out.println(cpf +" já existe!");
+            System.out.println(cpf + " já existe!");
+            
         }
 
     }//Fim cadAluno
@@ -119,10 +122,66 @@ public class CadAlunosNew {
 
     public static void imprimeAlunos() {
         System.out.println("Lista de Alunos");
-        for (Aluno aluno : alunos) {
-            System.out.println(alunos.toString());
+        if (alunos.isEmpty()) {
+            System.out.println("Lista vazia!");
+
+        } else {
+            for (Aluno aluno : alunos) {
+                System.out.println(alunos.toString());
+
+            }
 
         }
 
-    }
+    }//Fim do imprimeAlunos
+
+    public static void imprimeAlunosAtivos() {
+        System.out.println("Lista de Alunos");
+        if (alunos.isEmpty()) {
+            System.out.println("Lista vazia!");
+
+        } else {
+            for (Aluno aluno : alunos) {
+                if (aluno.isStatus()) {
+                    System.out.println(alunos.toString());
+                }
+            }
+        }
+    }//Fim do impremeAlunosAtivos
+
+    public static Aluno getAluno(String cpf) {
+        for (Aluno aluno : alunos) {
+            if (aluno.getCpf().equals(cpf)) {
+                return aluno;
+
+            }
+
+        }
+
+        return null;
+
+    }//Fim getAluno
+
+    public static void deletarAluno() {
+        System.out.println("Deletar/Inativar aluno");
+        System.out.println("Informe o CPF");
+        String cpf = leia.nextLine();
+        if (verCPF(cpf)) {
+            System.out.println("1 - Deletar \n2 - Inativar");
+            System.out.println("Digete:");
+            int op = leiaInt();
+            if (op == 1) {
+                alunos.remove(getAluno(cpf));
+                System.out.println("Aluno com CPF " + cpf + " Deletado com sucesso!");
+            } else if (op == 2) {
+                getAluno(cpf).setStatus(false);
+                System.out.println("Aluno " + getAluno(cpf).getNome() + " inativado.");
+
+            }
+        } else {
+            System.out.println("Aluno não encontrado!");
+        }
+
+    }//Fim deletarAluno
+
 }
